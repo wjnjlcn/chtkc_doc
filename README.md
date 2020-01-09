@@ -1,1 +1,3 @@
-# chtkc_doc
+# CHTKC software documentation
+
+CHTKC software documentation.
