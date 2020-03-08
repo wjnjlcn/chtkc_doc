@@ -35,7 +35,9 @@ The `build` directory will contain two versions of CHTKC binary files:
 chtkc <CMD> [OPTION...] ARGS...
 ```
 
-Currently, `chtkc` supports two subcommands, `<CMD>` can be `count` or `histo`.
+Currently, `chtkc` supports three subcommands, `<CMD>` can be `count`, `histo` or `dump`.
+
+### Couting k-mers
 
 `chtkc count` is the command to do k-mer counting, the usage is as follows:
 
@@ -59,15 +61,29 @@ chtkc count [OPTION...] FILE...
 * `-?, --help` - Print the usage of `chtkc`.  
 
 
+### Generate histogram for k-mer counting results
+
 `chtkc histo` produces a file containing the number of k-mers for each frequency value, the usage is as follows:
 
 ```shell
-Usage: histo [OPTION...] RESULT
+chtkc histo [OPTION...] RESULT
 ```
 
 * `-o, --out` The path of the output file.
 
-Some usage examples are as follows:
+### Output ASCII format of k-mer counting results
+
+`chtkc dump` outputs the ASCII format of the k-mer counting results, the usage is as follows:
+
+```shell
+chtkc dump [OPTION...] RESULT
+```
+
+* `-o, --out` The path of the output file.
+
+### Examples
+
+An example dataset can be downloaded [here](https://github.com/wjnjlcn/chtkc/raw/master/examples/test.fq), and some usage examples are as follows:
 
 ```shell
 chtkc count -k 28 -m 500M --fq -o result test.fq
