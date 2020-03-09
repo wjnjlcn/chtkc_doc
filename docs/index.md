@@ -27,6 +27,25 @@ The `build` directory will contain two versions of CHTKC binary files:
 !!! Note
     Under small RAM usage, `chtkco` has better performance, because it can allocate more nodes than `chtkc`. However, `chtkco` can only use up to 4G (4294967295) nodes, when the available memory is big enough, `chtkc` may instead allocate more nodes than `chtkco`. For example, when counting 28-mers, if the RAM usage is over 150 GB, please consider using `chtkc`.
 
+
+## Installation on macOS
+
+If you compile CHTKC on macOS, since CHTKC currently uses the `argp` library to parse arguments, and the library is usually not installed on macOS, it must be installed manually before compilation.
+
+One possible workaround is to install `argp-standalone` using `Homebrew`, please run these commands **before** compiling.:
+
+```shell
+# Install Homebrew.
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+# Use Homebrew to install argp-standalone.
+brew install argp-standalone
+
+# Manually update compiling flags.
+export CFLAGS="$CFLAGS -I/usr/local/include"
+export LDFLAGS="$LDFLAGS -L/usr/local/lib/ -largp"
+```
+
 ## Usage
 
 `chtkc` and `chtkco` share the same usage, take `chtkc` for example, the basic usage is as follows:
@@ -90,6 +109,7 @@ chtkc count -k 28 -m 500M --fq -o result test.fq
 chtkc count -k 55 -m 50G -t 16 --fq -o result --filter-min=1 test.fq --log=test.log
 chtkc count -k 28 -m 500M --fq --gz -o result test.fq.gz
 chtkc histo -o histo.txt result
+chtkc dump -o result.txt result
 ```
 
 ## Output
